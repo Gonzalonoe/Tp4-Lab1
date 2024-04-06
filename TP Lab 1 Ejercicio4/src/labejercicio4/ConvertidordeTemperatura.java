@@ -4,6 +4,10 @@
  */
 package labejercicio4;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author emanu
@@ -45,6 +49,12 @@ public class ConvertidordeTemperatura extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Calculadora", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
         jLabel1.setText("Grados Celsius:");
+
+        jtfGrados.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jtfGradosFocusLost(evt);
+            }
+        });
 
         jbConvertir.setText("Convertir");
         jbConvertir.addActionListener(new java.awt.event.ActionListener() {
@@ -115,12 +125,26 @@ public class ConvertidordeTemperatura extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbConvertirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbConvertirActionPerformed
-        // TODO add your handling code here:
+       double celsius;
+       celsius = Double.parseDouble(jtfGrados.getText());
+       
+       
     }//GEN-LAST:event_jbConvertirActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
     }//GEN-LAST:event_formWindowOpened
+
+    private void jtfGradosFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtfGradosFocusLost
+       Pattern p= Pattern.compile("^[+-]?[0-9]*\\.?[0-9]+(?:[eE][-+]?[0-9]+)?$");
+       Matcher m= p.matcher(jtfGrados.getText());
+       
+        if (!m.matches()) {
+            JOptionPane.showMessageDialog(this, "Usted debe ingesar numeros");
+            jtfGrados.requestFocus();
+            return;
+        }
+    }//GEN-LAST:event_jtfGradosFocusLost
 
     /**
      * @param args the command line arguments
