@@ -128,7 +128,11 @@ public class ConvertidordeTemperatura extends javax.swing.JFrame {
        double celsius;
        celsius = Double.parseDouble(jtfGrados.getText());
        
+       double calculo = celsius* 9/5 + 32;
        
+       JOptionPane.showMessageDialog(this, "Grados ferenjei " + calculo);
+       jtfGrados.setText("");
+       jtfGrados.requestFocus();
     }//GEN-LAST:event_jbConvertirActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -141,9 +145,12 @@ public class ConvertidordeTemperatura extends javax.swing.JFrame {
        
         if (!m.matches()) {
             JOptionPane.showMessageDialog(this, "Usted debe ingesar numeros");
+            jtfGrados.setText("");
             jtfGrados.requestFocus();
+            
             return;
         }
+        jtfGrados.requestFocus();
     }//GEN-LAST:event_jtfGradosFocusLost
 
     /**
