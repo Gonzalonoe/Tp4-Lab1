@@ -65,11 +65,6 @@ public class ConvertidordeTemperatura extends javax.swing.JFrame {
         jLabel1.setText("Grados Celsius:");
 
         jtfGrados.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jtfGrados.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jtfGradosFocusLost(evt);
-            }
-        });
 
         jbConvertir.setBackground(new java.awt.Color(51, 204, 255));
         jbConvertir.setFont(new java.awt.Font("SimSun-ExtB", 3, 24)); // NOI18N
@@ -148,25 +143,32 @@ public class ConvertidordeTemperatura extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void jbConvertirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbConvertirActionPerformed
-        double celsius;
-        celsius = Double.parseDouble(jtfGrados.getText());
-
-        double calculo = celsius* 9/5 + 32;
-
-        JOptionPane.showMessageDialog(this, "Grados ferenjei " + calculo);
-        jtfGrados.setText("");
-        jtfGrados.requestFocus();
-    }//GEN-LAST:event_jbConvertirActionPerformed
-
-    private void jtfGradosFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtfGradosFocusLost
-        Pattern p=Pattern.compile("^[+]?[0-9]*\\.?[0-9]+(?:[eE][-+]?[0-9]+)?$");
+        
+        Pattern p=Pattern.compile("\\d{1,4}");
         Matcher m=p.matcher(jtfGrados.getText());
         if(!m.matches()){
             JOptionPane.showMessageDialog(this, "Ustede debe ing. un nro");
             jtfGrados.requestFocus();
+            jtfGrados.setText("");
+        }
+        
+        int Grado;
+        if(jtfGrados.getText().isEmpty()){
+        
+            JOptionPane.showMessageDialog(this, "Hay campos sin completar");
             return;
         }
-    }//GEN-LAST:event_jtfGradosFocusLost
+        Grado=Integer.parseInt(jtfGrados.getText());
+
+        
+        double celsius;
+        celsius=Double.parseDouble(jtfGrados.getText());
+        double calculo = celsius * 9/5 + 32;
+        JOptionPane.showMessageDialog(this,"Grados farenjei" + calculo);
+        jtfGrados.setText("");
+        jtfGrados.requestFocus();
+                
+    }//GEN-LAST:event_jbConvertirActionPerformed
 
     /**
      * @param args the command line arguments
